@@ -33,3 +33,8 @@ set list lcs=tab:\|\
 "Some setting to make it work with Eclim
 set nocompatible
 
+"Delimitmate plugin
+let delimitMate_expand_cr = 1
+
+"NERDTree mapping
+nmap <leader>n :NERDTreeToggle<CR>
