@@ -14,6 +14,7 @@ noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
 "UltiSnip
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "vim-snippets/UltiSnips"]
 let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
