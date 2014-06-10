@@ -1,5 +1,6 @@
 "Pathogen
 execute pathogen#infect()
+Helptags
 
 syntax on
 
@@ -20,4 +21,11 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit = "vertical"
+
+"IndentLine
+let g:indentLine_color_term = 239
+let g:indentLine_color_gui = '#09AA08'
+let g:indentLine_char = '│'
+"there is a space behind
+set list lcs=tab:\|\ 
 
