@@ -1,5 +1,6 @@
 "Pathogen
 execute pathogen#infect()
+filetype plugin indent on
 Helptags
 
 syntax on
@@ -28,4 +29,7 @@ let g:indentLine_color_gui = '#09AA08'
 let g:indentLine_char = '│'
 "there is a space behind
 set list lcs=tab:\|\ 
+
+"Some setting to make it work with Eclim
+set nocompatible
 
