@@ -4,6 +4,11 @@ filetype plugin indent on
 Helptags
 
 syntax on
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set hlsearch
 
 "Disabled up/down/left/right keys
 inoremap  <Up>     <NOP>
@@ -38,3 +43,7 @@ let delimitMate_expand_cr = 1
 
 "NERDTree mapping
 nmap <leader>n :NERDTreeToggle<CR>
+
+"Ctr-P Setting
+let g:ctrlp_use_caching=0 
+
