@@ -1,3 +1,5 @@
+echo ">^.^<"
+
 "Pathogen
 execute pathogen#infect()
 filetype plugin indent on
@@ -9,6 +11,8 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set hlsearch
+set number
+set wrap
 
 "Disabled up/down/left/right keys
 inoremap  <Up>     <NOP>
@@ -47,3 +51,22 @@ nmap <leader>n :NERDTreeToggle<CR>
 "Ctr-P Setting
 let g:ctrlp_use_caching=0 
 
+"""""""""""MAPPING""
+"move line
+nnoremap - ddp
+nnoremap _ ddkkp
+"open vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+"make word upper 
+inoremap <c-u> <esc>viwUea
+nnoremap <c-u> viwUe
+
+nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>' ea'<esc>bi'<esc>el
+vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>l
+nnoremap H 0
+nnoremap L $
+inoremap jk <esc>
+inoremap <esc> <nop>
