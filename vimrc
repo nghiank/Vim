@@ -16,7 +16,7 @@ set hlsearch
 set incsearch
 set number
 set wrap
-colorscheme grb256
+colorscheme slate
 "}}}
 
 "Disabled up/down/left/right keys {{{
@@ -79,6 +79,12 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' ea'<esc>bi'<esc>el
 vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>l
 
+"move around buffer
+noremap <C-j> <C-w>j
+noremap <C-h> <C-w>h
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
+
 nnoremap H 0
 nnoremap L $
 inoremap jk <esc>
@@ -91,3 +97,8 @@ augroup filetype_vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
+
+"Setting file syntax {{{
+" gradle syntax highlighting
+au BufNewFile,BufRead *.gradle set filetype=groovy
+"}}}
