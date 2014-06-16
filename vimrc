@@ -84,11 +84,14 @@ noremap <C-j> <C-w>j
 noremap <C-h> <C-w>h
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+nnoremap <leader>q :q!<cr>
+nnoremap <leader>dq :1,100 bd!<cr>:q!<cr>
 
 nnoremap H 0
 nnoremap L $
 inoremap jk <esc>
 inoremap <esc> <nop>
+nnoremap <space> /
 "}}}
 
 "Vimscript file setting {{{
