@@ -30,12 +30,16 @@ noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 "}}}
 
+" Super Tab {{{
+let g:SuperTabDefaultCompletionType = 'context'
+let g:EclimCompletionMethod = 'omnifunc'
+" }}}
 "UltiSnip {{{
 let g:UltiSnipsSnippetDirectories=["UltiSnips", "vim-snippets/UltiSnips"]
 let g:UltiSnipsUsePythonVersion = 2
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-e>"
+let g:UltiSnipsJumpBackwardTrigger="<c-r>"
 let g:UltiSnipsEditSplit = "vertical"
 "}}}
 
@@ -94,6 +98,10 @@ inoremap <esc> <nop>
 nnoremap <space> /
 "}}}
 
+" Mapping for compiler {{{
+noremap <f3> :<c-u>w<cr>:Java<cr>
+" }}}
+
 "Vimscript file setting {{{
 augroup filetype_vim
     autocmd!
@@ -105,3 +113,5 @@ augroup END
 " gradle syntax highlighting
 au BufNewFile,BufRead *.gradle set filetype=groovy
 "}}}
+
+
