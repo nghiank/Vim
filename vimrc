@@ -1,5 +1,3 @@
-echo ">^.^<"
-
 "Pathogen {{{
 execute pathogen#infect()
 filetype plugin indent on
@@ -16,6 +14,9 @@ set hlsearch
 set incsearch
 set number
 set wrap
+set noswapfile
+
+
 colorscheme slate
 "}}}
 
@@ -39,7 +40,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "vim-snippets/UltiSnips"]
 let g:UltiSnipsUsePythonVersion = 2
 let g:UltiSnipsExpandTrigger="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-e>"
-let g:UltiSnipsJumpBackwardTrigger="<c-r>"
+let g:UltiSnipsJumpBackwardTrigger="<c-w>"
 let g:UltiSnipsEditSplit = "vertical"
 "}}}
 
@@ -56,11 +57,13 @@ set nocompatible
 "}}}
 
 "Delimitmate plugin {{{
-let delimitMate_expand_cr = 1
+let delimitMate_expand_cr = 0
 "}}}
 
 "NERDTree mapping {{{
 nmap <leader>n :NERDTreeToggle<CR>
+map  <leader>r :NERDTreeFind<cr>
+let g:NERDTreeChDirMode = 2
 "}}}
 
 "Ctr-P Setting{{{
@@ -74,6 +77,10 @@ nnoremap _ ddkkp
 "open vimrc
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+"open zsh
+nnoremap <leader>ez :vsplit "~/.zshrc"<cr>
+nnoremap <leader>sz :source "~/.zshrc"<cr>
+
 "make word upper 
 inoremap <c-u> <esc>viwUea
 nnoremap <c-u> viwUe
@@ -93,10 +100,14 @@ nnoremap <leader>dq :1,100 bd!<cr>:q!<cr>
 
 nnoremap H 0
 nnoremap L $
-inoremap jk <esc>
+inoremap jk <esc>:w!<cr>
+
 inoremap <esc> <nop>
 nnoremap <space> /
 "}}}
+
+nnoremap cc :Dispatch brazil-build && brazil-build apollo-pkg<cr>
+nnoremap cd :Dispatch brazil-build && brazil-build apollo-pkg <cr>
 
 " Mapping for compiler {{{
 noremap <f3> :<c-u>w<cr>:Java<cr>
@@ -113,5 +124,16 @@ augroup END
 " gradle syntax highlighting
 au BufNewFile,BufRead *.gradle set filetype=groovy
 "}}}
+
+autocmd BufEnter * lcd %:p:h
+
+function! GotoFileWithLineNumber()
+    let file_name = expand('<cfile>')
+    echo file_name
+    echo "-----"
+    echo expand('<cword>')
+endfunction
+
+"map gf :call GotoFileWithLineNumber()<CR>
 
 
