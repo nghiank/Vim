@@ -30,3 +30,7 @@ highlight DiffDelete term=reverse cterm=bold ctermbg=lightred ctermfg=16
 
 highlight PmenuSel ctermfg=16 ctermbg=156
 
+" Cursor related
+hi Cursor ctermbg=black
+hi Normal ctermbg=darkgray
+
