@@ -3,7 +3,6 @@ execute pathogen#infect()
 filetype plugin indent on
 Helptags
 
-
 "Some vim settings 
 syntax on
 set smartindent
@@ -17,7 +16,7 @@ set wrap
 set noswapfile
 
 
-colorscheme slate
+colorscheme eclipse
 
 "
 
@@ -66,8 +65,10 @@ nnoremap _ ddkkp
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 "open zsh
-nnoremap <leader>ez :vsplit "~/.zshrc"<cr>
-nnoremap <leader>sz :source "~/.zshrc"<cr>
+let zshpath = expand("~/.zshrc")
+let amazonzsh = expand("~/.amazonzsh")
+nnoremap <leader>ez :vsplit <c-r>=amazonzsh<cr><cr>
+nnoremap <leader>sz :!source <c-r>=zshpath<cr><cr>
 
 "make word upper 
 inoremap <c-u> <esc>viwUea
@@ -83,7 +84,7 @@ noremap <C-j> <C-w>j
 noremap <C-h> <C-w>h
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-nnoremap <leader>q :q!<cr>
+nnoremap qq :q!<cr>
 nnoremap <leader>dq :1,100 bd!<cr>:q!<cr>
 nnoremap <silent> <Leader>= :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
@@ -126,5 +127,7 @@ function! GotoFileWithLineNumber()
 endfunction
 
 "map gf :call GotoFileWithLineNumber()<CR>
+
+
 
 
