@@ -14,11 +14,7 @@ set incsearch
 set number
 set wrap
 set noswapfile
-
-
-colorscheme eclipse
-
-"
+set clipboard=unnamed
 
 "Disabled up/down/left/right keys 
 inoremap  <Up>     <NOP>
@@ -70,6 +66,9 @@ let amazonzsh = expand("~/.amazonzsh")
 nnoremap <leader>ez :vsplit <c-r>=amazonzsh<cr><cr>
 nnoremap <leader>sz :!source <c-r>=zshpath<cr><cr>
 
+"Ack use dispatch
+let g:ack_use_dispatch = 1
+
 "make word upper 
 inoremap <c-u> <esc>viwUea
 nnoremap <c-u> viwUe
@@ -80,6 +79,8 @@ nnoremap <leader>' ea'<esc>bi'<esc>el
 vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>l
 
 "move around buffer
+unmap <C-j>
+unmap <C-k>
 noremap <C-j> <C-w>j
 noremap <C-h> <C-w>h
 noremap <C-k> <C-w>k
@@ -94,8 +95,9 @@ nnoremap <silent> <Leader>2 :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap H 0
 nnoremap L $
 inoremap jk <esc>:w!<cr>
+"inoremap <esc> 
 
-inoremap <esc> <nop>
+inoremap jk <esc>
 nnoremap <space> /
 
 
@@ -117,7 +119,7 @@ augroup END
 "Setting file syntax 
 " gradle syntax highlighting
 
-autocmd BufEnter * lcd %:p:h
+autocmd BufEnter Config lcd %:p:h
 
 function! GotoFileWithLineNumber()
     let file_name = expand('<cfile>')
@@ -127,6 +129,22 @@ function! GotoFileWithLineNumber()
 endfunction
 
 "map gf :call GotoFileWithLineNumber()<CR>
+
+let default_type=" --type=java"
+function! SearchSelText()
+    let old_a = @a
+    normal "ay
+    let seltext = @a
+    let @a = old_a
+    execute ":Ack ".seltext.default_type
+endfunction
+
+vnoremap ff <esc>:call SearchSelText()<cr>
+nnoremap ff :Ack <cword><c-r>=default_type<cr><cr>
+nnoremap <c-f> :Ack <c-r>=default_type<cr><space>
+
+"Amazon build shortcut
+let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1na'
 
 
 
