@@ -138,21 +138,6 @@ function! GotoFileWithLineNumber()
 
 endfunction
 
-function! LookupMonitorTag()
-    let word = expand('<cword>')
-    let baseURL = "https://monitorportal.amazon.com/search?query="
-    let url = baseURL.word
-    echo "Url:".url
-    let dom = webapi#html#parseURL(url)
-
-    let plist="searchresult-component monitor"
-    let p1 = "monitor-amazon-com"
-    echo dom
-endfunction
-
-"map gf :call GotoFileWithLineNumber()<CR
-map mf :call LookupMonitorTag()<CR>
-
 let default_type=" --type=java"
 function! SearchSelText()
     let old_a = @a
@@ -171,6 +156,40 @@ let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1f
 
 "Short cut for dbext
 map <F12> :DBListTable<CR><CR>
+
+
+"""Commit Msg Saving
+function! SaveCurrentMsgToCommit()
+    execute "normal! gg"
+    "search for # and accept match at current position
+    let s:match = search('#', 'c')
+    echo "m=".s:match
+    if s:match !=1
+        let s:cpstr='normal! :0,'
+        let s:tmpfile=expand('~').'/tmp_git_commit'
+        echo s:tmpfile
+        let s:cpstr .= 'w! '.s:tmpfile
+        echom 'aaa='.s:cpstr
+        "execute s:cpstr
+    elseif s:match=1
+        echom 'I am not saving your comment because it has no description'
+    endif
+endfunction
+map <F3> :call SaveCurrentMsgToCommit()<cr>
+
+function! AddDefaultMsgToCommit()
+    let default_snippet_file = expand('~')."/.vim/amazonsnippets/commitmsg"
+    execute "silent normal!gg"
+    execute ":r ".default_snippet_file
+    execute "silent normal!gg"
+endfunction
+
+augroup GitCommitEditMsg
+    autocmd!
+    autocmd BufRead COMMIT_EDITMSG :call AddDefaultMsgToCommit()
+    autocmd BufWritepost COMMIT_EDITMSG :call SaveCurrentMsgToCommit()
+augroup END
+
 
 
 
