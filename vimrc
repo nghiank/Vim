@@ -158,27 +158,29 @@ let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1f
 map <F12> :DBListTable<CR><CR>
 
 
+
 """Commit Msg Saving
+let s:tmpfile=expand('~').'/cache_git_commit_message'
 function! SaveCurrentMsgToCommit()
     execute "normal! gg"
     "search for # and accept match at current position
     let s:match = search('#', 'c')
-    echo "m=".s:match
     if s:match !=1
-        let s:cpstr='normal! :0,'
-        let s:tmpfile=expand('~').'/tmp_git_commit'
-        echo s:tmpfile
-        let s:cpstr .= 'w! '.s:tmpfile
-        echom 'aaa='.s:cpstr
-        "execute s:cpstr
+        let s:match = s:match - 1
+        let s:cpstr='silent normal! :0,'.s:match
+        let s:cpstr .= 'w! '.s:tmpfile."\<cr>"
+        execute s:cpstr
     elseif s:match=1
-        echom 'I am not saving your comment because it has no description'
+        echom 'Desc is not saved because it has no description'
     endif
 endfunction
 map <F3> :call SaveCurrentMsgToCommit()<cr>
 
 function! AddDefaultMsgToCommit()
     let default_snippet_file = expand('~')."/.vim/amazonsnippets/commitmsg"
+    if filereadable(s:tmpfile)
+        let default_snippet_file=s:tmpfile
+    endif
     execute "silent normal!gg"
     execute ":r ".default_snippet_file
     execute "silent normal!gg"
