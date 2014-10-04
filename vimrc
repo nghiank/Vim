@@ -77,6 +77,9 @@ inoremap <F2> <esc>:e<cr>
 "Ack use dispatch
 let g:ack_use_dispatch = 1
 
+"Ack use dispatch
+let g:ack_use_dispatch = 1
+
 "make word upper 
 inoremap <c-u> <esc>viwUea
 nnoremap <c-u> viwUe
@@ -204,6 +207,22 @@ augroup GitCommitEditMsg
 augroup END
 
 
+
+let default_type=" --type=java"
+function! SearchSelText()
+    let old_a = @a
+    normal "ay
+    let seltext = @a
+    let @a = old_a
+    execute ":Ack ".seltext.default_type
+endfunction
+
+vnoremap ff <esc>:call SearchSelText()<cr>
+nnoremap ff :Ack <cword><c-r>=default_type<cr><cr>
+nnoremap <c-f> :Ack <c-r>=default_type<cr><space>
+
+"Amazon build shortcut
+let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1na'
 
 
 
