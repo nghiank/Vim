@@ -161,6 +161,7 @@ map <F12> :DBListTable<CR><CR>
 
 """Commit Msg Saving
 let s:tmpfile=expand('~').'/cache_git_commit_message'
+let s:default_snippet_file = expand('~')."/.vim/amazonsnippets/commitmsg"
 function! SaveCurrentMsgToCommit()
     execute "normal! gg"
     "search for # and accept match at current position
@@ -174,20 +175,32 @@ function! SaveCurrentMsgToCommit()
         echom 'Desc is not saved because it has no description'
     endif
 endfunction
-function! AddDefaultMsgToCommit()
-    let default_snippet_file = expand('~')."/.vim/amazonsnippets/commitmsg"
-    if filereadable(s:tmpfile)
-        let default_snippet_file=s:tmpfile
-    endif
+function! LoadDefaultMsg()
+    echo 'load default msg'
+    "Delete the old comments
+    execute "normal! ggV/#\<cr>kddO"
     execute "silent normal!gg"
-    execute ":r ".default_snippet_file
+    execute ":r ".s:default_snippet_file
     execute "silent normal!ggdd"
 endfunction
+
+function! AddDefaultMsgToCommit()
+    let s:file_to_load = s:default_snippet_file
+    if filereadable(s:tmpfile)
+        let s:file_to_load=s:tmpfile
+    endif
+    execute "silent normal!gg"
+    execute ":r ".s:file_to_load
+    execute "silent normal!ggdd"
+endfunction
+
 augroup GitCommitEditMsg
     autocmd!
     autocmd BufRead COMMIT_EDITMSG :call AddDefaultMsgToCommit()
     autocmd BufWritepost COMMIT_EDITMSG :call SaveCurrentMsgToCommit()
+    autocmd BufRead COMMIT_EDITMSG nnoremap <buffer> <C-l> :call LoadDefaultMsg()
 augroup END
+
 
 
 
