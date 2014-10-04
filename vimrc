@@ -174,8 +174,6 @@ function! SaveCurrentMsgToCommit()
         echom 'Desc is not saved because it has no description'
     endif
 endfunction
-map <F3> :call SaveCurrentMsgToCommit()<cr>
-
 function! AddDefaultMsgToCommit()
     let default_snippet_file = expand('~')."/.vim/amazonsnippets/commitmsg"
     if filereadable(s:tmpfile)
@@ -185,7 +183,6 @@ function! AddDefaultMsgToCommit()
     execute ":r ".default_snippet_file
     execute "silent normal!gg"
 endfunction
-
 augroup GitCommitEditMsg
     autocmd!
     autocmd BufRead COMMIT_EDITMSG :call AddDefaultMsgToCommit()
