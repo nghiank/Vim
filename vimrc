@@ -183,6 +183,7 @@ function! AddDefaultMsgToCommit()
     execute ":r ".default_snippet_file
     execute "silent normal!gg"
 endfunction
+
 augroup GitCommitEditMsg
     autocmd!
     autocmd BufRead COMMIT_EDITMSG :call AddDefaultMsgToCommit()
