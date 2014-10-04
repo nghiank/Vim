@@ -175,30 +175,32 @@ function! SaveCurrentMsgToCommit()
         echom 'Desc is not saved because it has no description'
     endif
 endfunction
-function! LoadDefaultMsg()
-    echo 'load default msg'
+
+function! LoadMsg(filename)
     "Delete the old comments
     execute "normal! ggV/#\<cr>kddO"
     execute "silent normal!gg"
-    execute ":r ".s:default_snippet_file
+    execute ":r ".a:filename
     execute "silent normal!ggdd"
 endfunction
 
-function! AddDefaultMsgToCommit()
+function! LoadDefaultMsg()
+    call LoadMsg(s:default_snippet_file)
+endfunction
+
+function! AddMsgToCommit()
     let s:file_to_load = s:default_snippet_file
     if filereadable(s:tmpfile)
         let s:file_to_load=s:tmpfile
     endif
-    execute "silent normal!gg"
-    execute ":r ".s:file_to_load
-    execute "silent normal!ggdd"
+    call LoadMsg(s:file_to_load)
 endfunction
 
 augroup GitCommitEditMsg
     autocmd!
-    autocmd BufRead COMMIT_EDITMSG :call AddDefaultMsgToCommit()
+    autocmd BufRead COMMIT_EDITMSG :call AddMsgToCommit()
     autocmd BufWritepost COMMIT_EDITMSG :call SaveCurrentMsgToCommit()
-    autocmd BufRead COMMIT_EDITMSG nnoremap <buffer> <C-l> :call LoadDefaultMsg()
+    autocmd BufRead COMMIT_EDITMSG nnoremap <buffer> <C-l> :call LoadDefaultMsg()<cr>
 augroup END
 
 
