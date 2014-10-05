@@ -1,8 +1,9 @@
 set shortmess+=T
 set cmdheight=2
 let g:netrw_silent = 1
-source /apollo/env/envImprovement/var/vimruntimehook
-"Pathogen 
+if filereadable('/apollo/env/envImprovement/var/vimruntimehook')
+    source  /apollo/env/envImprovement/var/vimruntimehook
+endif
 execute pathogen#infect()
 filetype plugin indent on
 Helptags
@@ -90,8 +91,6 @@ nnoremap <leader>' ea'<esc>bi'<esc>el
 vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>l
 
 "move around buffer
-unmap <C-j>
-unmap <C-k>
 noremap <C-j> <C-w>j
 noremap <C-h> <C-w>h
 noremap <C-k> <C-w>k
@@ -221,8 +220,11 @@ vnoremap ff <esc>:call SearchSelText()<cr>
 nnoremap ff :Ack <cword><c-r>=default_type<cr><cr>
 nnoremap <c-f> :Ack <c-r>=default_type<cr><space>
 
-"Amazon build shortcut
+"Amazon 
 let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1na'
+if !exists('g:ApolloRoot')
+   let g:ApolloRoot=expand('~/apolloenv')
+endif
 
 
 
