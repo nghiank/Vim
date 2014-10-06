@@ -173,10 +173,10 @@ nnoremap ff :Ack <cword><c-r>=default_type<cr><cr>
 nnoremap <c-f> :Ack <c-r>=default_type<cr><space>
 
 "Amazon 
+
 let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1na'
 if !exists('g:ApolloRoot')
    let g:ApolloRoot=expand('~/apolloenv')
 endif
-
 
 
