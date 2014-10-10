@@ -174,8 +174,10 @@ nnoremap <c-f> :Ack <c-r>=default_type<cr><space>
 
 "Amazon 
 let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1na'
+let g:dbext_default_profile_mysql_local_DBI = 'type=DBI:user=dev_user:driver=mysql:conn_parms=database=tgcinvoicing-na;host='
+
+nnoremap <leader>f :NERDTreeFind<cr>
 if !exists('g:ApolloRoot')
    let g:ApolloRoot=expand('~/apolloenv')
 endif
 
-#my 11212 world!!!
