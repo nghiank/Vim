@@ -182,6 +182,3 @@ if !exists('g:ApolloRoot')
 endif
 
 "aHello webhook
-"aHello webhook
-"aHello webhook
-"aHello webhook
