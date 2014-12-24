@@ -2,8 +2,8 @@ set shortmess+=T
 set cmdheight=2
 let g:netrw_silent = 1
 let g:yankring_replace_n_pkey=''
-source /apollo/env/envImprovement/var/vimruntimehook
-"Pathogen 
+if filereadable('/apollo/env/envImprovement/var/vimruntimehook')
+    source  /apollo/env/envImprovement/var/vimruntimehook
 execute pathogen#infect()
 filetype plugin indent on
 Helptags
@@ -102,8 +102,6 @@ nnoremap <leader>' ea'<esc>bi'<esc>el
 vnoremap <leader>" <esc>a"<esc>`<i"<esc>`>l
 
 "move around buffer
-unmap <C-j>
-unmap <C-k>
 noremap <C-j> <C-w>j
 noremap <C-h> <C-w>h
 noremap <C-k> <C-w>k
@@ -177,3 +175,26 @@ hi! DiffAdd      guibg=#003300
 hi! DiffChange   guibg=#003300
 hi! DiffDelete   guifg=#330000 guibg=#330000
 hi! DiffText     guibg=#990000 
+
+let default_type=" --type=java"
+function! SearchSelText()
+    let old_a = @a
+    normal "ay
+    let seltext = @a
+    let @a = old_a
+    execute ":Ack ".seltext.default_type
+endfunction
+
+vnoremap ff <esc>:call SearchSelText()<cr>
+nnoremap ff :Ack <cword><c-r>=default_type<cr><cr>
+nnoremap <c-f> :Ack <c-r>=default_type<cr><space>
+
+"Amazon 
+let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1na'
+let g:dbext_default_profile_mysql_local_DBI = 'type=DBI:user=dev_user:driver=mysql:conn_parms=database=tgcinvoicing-na;host='
+
+nnoremap <leader>f :NERDTreeFind<cr>
+if !exists('g:ApolloRoot')
+   let g:ApolloRoot=expand('~/apolloenv')
+endif
+
