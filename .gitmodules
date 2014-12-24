@@ -40,3 +40,9 @@
 [submodule "bundle/eunuch"]
 	path = bundle/eunuch
 	url = https://github.com/tpope/vim-eunuch.git
+[submodule "gitcommitmsg"]
+	path = gitcommitmsg
+	url = https://github.com/nghiank/gitcommitmsg.git
+[submodule "bundle/gitcommitmsg"]
+	path = bundle/gitcommitmsg
+	url = https://github.com/nghiank/gitcommitmsg.git

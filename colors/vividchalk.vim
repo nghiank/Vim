@@ -144,12 +144,10 @@ call s:hibg("Folded"    ,"#110077","DarkBlue",17)
 call s:hifg("Folded"    ,"#aaddee","LightCyan",63)
 highlight FoldColumn    none
 high link FoldColumn    Folded
-highlight DiffAdd       ctermbg=4 guibg=DarkBlue
-highlight DiffChange    ctermbg=5 guibg=DarkMagenta
-highlight DiffDelete    ctermfg=12 ctermbg=6 gui=bold guifg=Blue guibg=DarkCyan
-highlight DiffText      ctermbg=DarkRed
-highlight DiffText      cterm=bold ctermbg=9 gui=bold guibg=Red
-
+hi! DiffAdd      guibg=#003300
+hi! DiffChange   guibg=#003300
+hi! DiffDelete   guifg=#330000 guibg=#330000
+hi! DiffText     guibg=#990000 
 highlight Pmenu         guifg=White ctermfg=White gui=bold cterm=bold
 highlight PmenuSel      guifg=White ctermfg=White gui=bold cterm=bold
 call s:hibg("Pmenu"     ,"#000099","Blue",18)

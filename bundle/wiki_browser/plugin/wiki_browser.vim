@@ -29,6 +29,7 @@ com! -nargs=0     WikiTag call <SID>_WikiTag(<f-args>)
 " internal utility functions
 
 let s:WikiUtil = g:ApolloRoot . "/bin/wikiUtil"
+echom "Wiki root:".s:WikiUtil
 let s:WikiDir = tempname()
 let s:DefaultSummary = "Automated upload from " . hostname()
 let s:WikiUtilGuiOpt = has("gui_running") ? " --gui " : ""

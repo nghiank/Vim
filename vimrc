@@ -1,6 +1,7 @@
 set shortmess+=T
 set cmdheight=2
 let g:netrw_silent = 1
+let g:yankring_replace_n_pkey=''
 source /apollo/env/envImprovement/var/vimruntimehook
 "Pathogen 
 execute pathogen#infect()
@@ -18,8 +19,15 @@ set incsearch
 set number
 set wrap
 set noswapfile
-set clipboard=unnamed
+set clipboard=unnamedplus
 set foldlevel=99
+set shortmess+=T
+set cmdheight=2
+set ignorecase
+set smartcase
+
+echo v:scrollstart
+
 
 "Disabled up/down/left/right keys 
 inoremap  <Up>     <NOP>
@@ -40,6 +48,11 @@ let g:indentLine_char = '│'
 set list lcs=tab:\|\ 
 
 
+"search related
+"search selected text
+vnorem // y/<c-r>"<cr>"
+"replace selected text
+vnoremap <C-a> "hy:%s/<C-r>h//gc<left><left><left>
 "Some setting to make it work with Eclim 
 set nocompatible
 
@@ -56,6 +69,8 @@ let g:NERDTreeChDirMode = 2
 
 "Ctr-P Setting
 let g:ctrlp_use_caching=0 
+let g:ctrlp_map='<c-p>'
+let g:ctrlp_cmd='CtrlP'
 
 
 "My Mapping 
@@ -73,9 +88,6 @@ nnoremap <leader>sz :!source <c-r>=zshpath<cr><cr>
 "refresh file
 nnoremap <F2> :e<cr>
 inoremap <F2> <esc>:e<cr>
-
-"Ack use dispatch
-let g:ack_use_dispatch = 1
 
 "Ack use dispatch
 let g:ack_use_dispatch = 1
@@ -153,77 +165,15 @@ endfunction
 vnoremap ff <esc>:call SearchSelText()<cr>
 nnoremap ff :Ack <cword><c-r>=default_type<cr><cr>
 nnoremap <c-f> :Ack <c-r>=default_type<cr><space>
+nnoremap <leader>s :%s/\<<C-r><C-w>\>/
 
 "Amazon build shortcut
 let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1fe'
 
 "Short cut for dbext
 map <F12> :DBListTable<CR><CR>
-
-
-
-"""Commit Msg Saving
-let s:tmpfile=expand('~').'/cache_git_commit_message'
-let s:default_snippet_file = expand('~')."/.vim/amazonsnippets/commitmsg"
-function! SaveCurrentMsgToCommit()
-    execute "normal! gg"
-    "search for # and accept match at current position
-    let s:match = search('#', 'c')
-    if s:match !=1
-        let s:match = s:match - 1
-        let s:cpstr='silent normal! :0,'.s:match
-        let s:cpstr .= 'w! '.s:tmpfile."\<cr>"
-        execute s:cpstr
-    elseif s:match=1
-        echom 'Desc is not saved because it has no description'
-    endif
-endfunction
-
-function! LoadMsg(filename)
-    "Delete the old comments
-    execute "normal! ggV/#\<cr>kddO"
-    execute "silent normal!gg"
-    execute ":r ".a:filename
-    execute "silent normal!ggdd"
-endfunction
-
-function! LoadDefaultMsg()
-    call LoadMsg(s:default_snippet_file)
-endfunction
-
-function! AddMsgToCommit()
-    let s:file_to_load = s:default_snippet_file
-    if filereadable(s:tmpfile)
-        let s:file_to_load=s:tmpfile
-    endif
-    call LoadMsg(s:file_to_load)
-endfunction
-
-augroup GitCommitEditMsg
-    autocmd!
-    autocmd BufRead COMMIT_EDITMSG :call AddMsgToCommit()
-    autocmd BufWritepost COMMIT_EDITMSG :call SaveCurrentMsgToCommit()
-    autocmd BufRead COMMIT_EDITMSG nnoremap <buffer> <C-l> :call LoadDefaultMsg()<cr>
-augroup END
-
-
-
-let default_type=" --type=java"
-function! SearchSelText()
-    let old_a = @a
-    normal "ay
-    let seltext = @a
-    let @a = old_a
-    execute ":Ack ".seltext.default_type
-endfunction
-
-vnoremap ff <esc>:call SearchSelText()<cr>
-nnoremap ff :Ack <cword><c-r>=default_type<cr><cr>
-nnoremap <c-f> :Ack <c-r>=default_type<cr><space>
-
-"Amazon build shortcut
-let g:dbext_default_profile_ORA         = 'type=ORA:user=nghian_RO:srvname=tgc1na'
-
-
-
-
+colorscheme vividchalk
+hi! DiffAdd      guibg=#003300
+hi! DiffChange   guibg=#003300
+hi! DiffDelete   guifg=#330000 guibg=#330000
+hi! DiffText     guibg=#990000 
