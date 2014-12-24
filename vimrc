@@ -4,6 +4,7 @@ let g:netrw_silent = 1
 let g:yankring_replace_n_pkey=''
 if filereadable('/apollo/env/envImprovement/var/vimruntimehook')
     source  /apollo/env/envImprovement/var/vimruntimehook
+endif
 execute pathogen#infect()
 filetype plugin indent on
 Helptags
